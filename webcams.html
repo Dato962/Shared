@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webcam Sardegna</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+
+        h1,
+        h2 {
+            color: #333;
+            text-align: center;
+        }
+
+        .webcam-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+            justify-content: center;
+        }
+
+        .webcam-box {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            width: calc(33% - 40px);
+            /* Circa 3 webcam per riga */
+            min-width: 300px;
+            box-sizing: border-box;
+            text-align: center;
+            cursor: pointer;
+            /* Cambia il cursore per indicare che è cliccabile */
+        }
+
+        .webcam-box h3 {
+            margin-top: 0;
+            color: #555;
+        }
+
+        .webcam-frame-container {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            /* Nasconde le parti dell'immagine che sporgono */
+        }
+
+        .webcam-preview {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            /* Adatta l'immagine mantenendo le proporzioni */
+            display: block;
+            /* Rimuove spazio extra sotto l'immagine */
+        }
+
+        /* Overlay per la visualizzazione a schermo intero */
+        .webcam-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            /* Sfondo scuro semi-trasparente */
+            z-index: 1000;
+            /* Assicura che sia sopra a tutto */
+            justify-content: center;
+            align-items: center;
+        }
+
+        .webcam-overlay img {
+            max-width: 95%;
+            max-height: 95%;
+            object-fit: contain;
+            /* Assicura che l'immagine si adatti senza distorsioni */
+        }
+
+        .close-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .webcam-box {
+                width: calc(50% - 20px);
+                /* 2 webcam per riga su schermi più piccoli */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .webcam-box {
+                width: 100%;
+                /* 1 webcam per riga su schermi molto piccoli */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Webcams della costa della Sardegna</h1>
+    <h2>dalla Tavolara in senso antiorario</h2>
+
+    <div class="webcam-container">
+        <div class="webcam-box"
+            onclick="showFullImage('https://images-webcams.windy.com/90/1404823490/current/full/1404823490.jpg')">
+            <h3>Tavolara</h3>
+            <div class="webcam-frame-container">
+                <img class="webcam-preview"
+                    src="https://images-webcams.windy.com/90/1404823490/current/full/1404823490.jpg" 
+alt="Tavolara">
+            </div>
+        </div>
+        <div class="webcam-box"
+            onclick="showFullImage('https://images-webcams.windy.com/22/1510528122/current/full/1510528122.jpg')">
+            <h3>Santa Teresa di Gallura</h3>
+            <div class="webcam-frame-container">
+                <img class="webcam-preview"
+                    src="https://images-webcams.windy.com/22/1510528122/current/full/1510528122.jpg" 
+alt="Santa Teresa di Gallura">
+            </div>
+        </div>
+        <div class="webcam-box"
+            onclick="showFullImage('https://images-webcams.windy.com/56/1636279756/current/full/1636279756.jpg')">
+            <h3>Capo Caccia</h3>
+            <div class="webcam-frame-container">
+                <img class="webcam-preview"
+                    src="https://images-webcams.windy.com/56/1636279756/current/full/1636279756.jpg" 
+alt="Capo Caccia">
+            </div>
+        </div>
+        <div class="webcam-box"
+            onclick="showFullImage('https://images-webcams.windy.com/98/1718470098/current/full/1718470098.jpg')">
+            <h3>Buggerru</h3>
+            <div class="webcam-frame-container">
+                <img class="webcam-preview"
+                    src="https://images-webcams.windy.com/98/1718470098/current/full/1718470098.jpg" 
+alt="Buggerru">
+            </div>
+        </div>
+        <div class="webcam-box"
+            onclick="showFullImage('https://www.webcamsardinia.com/pula/webcam.php')">
+            <h3>Pula</h3>
+            <div class="webcam-frame-container">
+                <img class="webcam-preview"
+                    src="https://www.webcamsardinia.com/pula/webcam.php" 
+alt="Pula">
+            </div>
+        </div>
+        <div class="webcam-box"
+            onclick="showFullImage('https://images-webcams.windy.com/71/1550359371/current/full/1550359371.jpg')">
+            <h3>Costa Rei</h3>
+            <div class="webcam-frame-container">
+                <img class="webcam-preview"
+                    src="https://images-webcams.windy.com/71/1550359371/current/full/1550359371.jpg" 
+alt="Costa Rei">
+            </div>
+        </div>
+        <div class="webcam-box"
+            onclick="showFullImage('https://images-webcams.windy.com/90/1678026890/current/full/1678026890.jpg')">
+            <h3>Cardedu</h3>
+            <div class="webcam-frame-container">
+                <img class="webcam-preview"
+                    src="https://images-webcams.windy.com/90/1678026890/current/full/1678026890.jpg" 
+alt="Cardedu">
+            </div>
+        </div>
+        <div class="webcam-box"
+            onclick="showFullImage('https://images-webcams.windy.com/14/1570647414/current/full/1570647414.jpg')">
+            <h3>Dorgali</h3>
+            <div class="webcam-frame-container">
+                <img class="webcam-preview"
+                    src="https://images-webcams.windy.com/14/1570647414/current/full/1570647414.jpg" 
+alt="Dorgali">
+            </div>
+        </div>
+        <div class="webcam-box"
+            onclick="showFullImage('https://images-webcams.windy.com/17/1508272517/current/full/1508272517.jpg')">
+            <h3>San Teodoro</h3>
+            <div class="webcam-frame-container">
+                <img class="webcam-preview"
+                    src="https://images-webcams.windy.com/17/1508272517/current/full/1508272517.jpg"
+alt="San Teodoro">
+            </div>
+        </div>
+        </div>
+
+    <div id="webcamOverlay" class="webcam-overlay">
+        <span class="close-button" onclick="hideFullImage()">&times;</span>
+        <img id="fullsizeImage" src="" alt="Webcam a schermo intero">
+    </div>
+
+    <script>
+        function showFullImage(imageSrc) {
+            document.getElementById('fullsizeImage').src = imageSrc;
+            document.getElementById('webcamOverlay').style.display = 'flex';
+        }
+
+        function hideFullImage() {
+            document.getElementById('webcamOverlay').style.display = 'none';
+        }
+    </script>
+
+</body>
+
+</html>
